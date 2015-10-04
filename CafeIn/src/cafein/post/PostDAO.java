@@ -29,7 +29,7 @@ public class PostDAO {
 	}
 	
 	public void addPost(Post post) throws SQLException {
-		String sql = "INSERT INTO post (cid, content) VALUES(?, ?)";
+		String sql = "INSERT INTO post (cid, content, colorUrl) VALUES(?, ?, ?)";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
@@ -41,6 +41,7 @@ public class PostDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, post.getCid());
 			pstmt.setString(2, post.getContents());
+			pstmt.setString(3, post.getColorUrl());
 			pstmt.executeUpdate();
 		}  finally {
 			if(pstmt != null){
@@ -69,9 +70,10 @@ public class PostDAO {
 			while(rs.next()) {
 				int pid = rs.getInt("pid");
 				String contents = rs.getString("content");
+				String colorUrl = rs.getString("colorUrl");
 				String creattime = rs.getString("postingtime");
 				int liked = rs.getInt("liked");
-				result.add(new Post(pid,contents,creattime,liked));
+				result.add(new Post(pid,contents,creattime,liked,colorUrl));
 			}
 			
 			pstmt.close();

@@ -11,67 +11,55 @@
 
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title>cafe In</title>
-<meta name="viewport"
-	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<!--meta name="description" content="The HTML5 Herald"-->
-<!--meta name="author" content="SitePoint"-->
-<link rel="stylesheet" href="/css/styles.css">
-<!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-
+	<meta charset="utf-8">
+	<title>cafe in</title>
+	<link rel="stylesheet" type="text/css" href="/css/index.css">
 </head>
-
 <body>
-	<header class="top-bar">
-		<img class="logo" src="http://i60.tinypic.com/1jujr7.png"></img>
-		<img class="search" src="http://i62.tinypic.com/20b0bog.png"></img>
+	<header class="header">
+		<div class="logo"></div>
 	</header>
-	<div class="title">
-		<div class="youarein">You're in</div>
-		<div class="cafe-name">Coffea</div>
-	</div>
-	<div class="posting">
-		<form action="/createpost" method="post">
-			<input class="textbox" name="contents" type="textbox" placeholder="	Q. 이 카페 아메리카노 어때요?">
-			<div class="textbox-bg"></div>
-			<input type="hidden" name="cid" value="${param.cid}">
-			<button class="send">게 시</button>
-		</form>
-	</div>
-	<ul>
-		<c:forEach items="${posts}" var="post">
-			<li class="post">
-				<img class="quatation-up" src="http://i58.tinypic.com/30holtz.png">
-				<div class="contents">${post.contents}</div>
-				<img class="quatation-down" src="http://i59.tinypic.com/dr46mw.png">
-				<div class="info">
-					<span class="like-post" value="${post.pid}" name="likesOnPost" action="/likedOnPost">${post.liked}</span>
-					<span class="replies-post">${fn:length(post.replyList)}</span>
-					<c:set var="date" value="${fn:split(post.creattime, ' ')}" />
-					<div class="time">${date[0]}</div>
-				</div>
-				<ul class="replies">
-					<c:forEach items="${post.replyList}" var="reply">
-						<li class="reply">
-							<span class="reply-content">re: ${reply.replyContent}</span>
-							<span class="like-reply" value="${reply.reId}" name ="likesOnReply" action="/likedOnReply" method= "post" >${reply.liked}</span>
-						</li>
-					</c:forEach>
-				</ul>
-				<div class="replyBox">
-					<form action="/createReply" method="post">
-						<input name="reply" type="text" placeholder=" re: 댓글 달기..."> 
-						<input name="pid" type="hidden" value="${post.pid}">
-						<button>게 시</button>
-					</form>
-				</div>
-			</li>
-		</c:forEach>
-	</ul>
-	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-	<script src="${pageContext.request.contextPath}/js/scripts.js"></script>
+	<main class="main">
+		<ul class="previous-colors styleme">
+			<c:forEach items="${posts}" var="post">
+				<li class="post">
+					<div class="time-contents">
+						<c:set var="date" value="${fn:split(post.creattime, ' ')}" />
+						<div class="time">${date[0]}</div>
+						<span class="contents">${post.contents}</span>
+					</div>
+					<img class="post-color" src="${post.colorUrl}">
+				</li>
+			</c:forEach>
+		</ul>
+		<div class="today-color">
+			<div class="today-color-top">Today's Color</div>
+			<div class="today-color-img-desc">
+				<img class="today-color-img" src="">
+			</div>
+			<form class="today-color-form" method="post" action="/createpost">
+				<input type="text" name="contents" id="today-color-desc" placeholder="지금 당신에게 이 색의 의미는 뭔가요?">
+				<input type="hidden" name="cid" value="${param.cid}">
+				<input type="hidden" name="colorname" id="colorName" value="">
+				<button class="button" id="send">마음<br>그리기</button>
+			</form>
+		</div>
+		<div class="palette">
+			<div class="colors">
+				<img class="color" id="red" src="http://i62.tinypic.com/aljjo1.png">
+				<img class="color" id="pink" src="http://oi61.tinypic.com/r9ptv5.jpg">
+				<img class="color" id="orange" src="http://i61.tinypic.com/qn2ue0.jpg">
+				<img class="color" id="yellow" src="http://i57.tinypic.com/n5fsqa.png">
+				<img class="color" id="yellowgreen" src="http://i57.tinypic.com/2cqmwdd.jpg">
+				<img class="color" id="green" src="http://i59.tinypic.com/2pt86ew.jpg">
+				<img class="color" id="skyblue" src="http://i62.tinypic.com/11r669v.png">
+				<img class="color" id="blue" src="http://i61.tinypic.com/nyg4nb.jpg">
+				<img class="color" id="darkblue" src="http://i59.tinypic.com/1zef500.jpg">
+				<img class="color" id="purple" src="http://i59.tinypic.com/6s4aoo.png">
+			</div>
+		</div>
+		<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript" src="/js/index.js"></script>
+	</main>
 </body>
 </html>

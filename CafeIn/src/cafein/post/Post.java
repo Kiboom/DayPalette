@@ -11,16 +11,19 @@ public class Post {
 	private List<Reply> replyList;
 	private int cid;
 	private int liked;
+	private String colorUrl;
 	
-	public Post(int cid, String contents) {
+	public Post(int cid, String contents, String colorUrl) {
 		this.cid = cid;
 		this.contents = contents;
+		this.colorUrl = colorUrl;
 	}	
-	public Post(int pid, String contents, String creattime, int liked) {
+	public Post(int pid, String contents, String creattime, int liked, String colorUrl) {
 		this.pid = pid;
 		this.contents = contents;
 		this.creattime = creattime;
 		this.liked = liked;
+		this.colorUrl = colorUrl;
 	}
 
 	public List<Reply> getReplyList() {
@@ -58,6 +61,12 @@ public class Post {
 	}
 	public void setLiked(int liked) {
 		this.liked = liked;
+	}
+	public String getColorUrl(){
+		return colorUrl;
+	}
+	public void setColorUrl(String colorUrl){
+		this.colorUrl = colorUrl;
 	}
 	
 }

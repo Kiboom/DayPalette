@@ -24,7 +24,6 @@ public class MainServlet extends HttpServlet {
 		PostDAO postdao = new PostDAO();
 		ReplyDAO replydao = new ReplyDAO();
 		
-		
 		String cafeName = cafedao.getName(cid);
 		ArrayList<Post> posts = postdao.getPosts(cid);
 		for (Post post : posts) {
